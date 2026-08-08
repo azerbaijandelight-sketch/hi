@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Hi Coffee</title>
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ====== NAVIGATION ====== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo" onclick="showPage('home')">
+      <img src="images/logo.png" alt="Hi Coffee Logo" class="logo-img" />
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" onclick="showPage('home')">Ana Səhifə</a></li>
+      <li><a href="#" onclick="showPage('menu')">Menyu</a></li>
+      <li><a href="#" onclick="showPage('gallery')">Qalerya</a></li>
+      <li><a href="#" onclick="showPage('reservation')">Rezervasiya</a></li>
+      <li><a href="#" onclick="showPage('faq')">FAQ</a></li>
+      <li><a href="#" onclick="showPage('vacancies')">Vakansiyalar</a></li>
+    </ul>
+    <button class="cart-btn" onclick="toggleCart()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ====== CART SIDEBAR ====== -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<aside class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>Səbət</h2>
+    <button onclick="toggleCart()" class="cart-close">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">Səbət boşdur</p>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      Cəmi: <strong id="cartTotal">0 ₼</strong>
+    </div>
+    <button class="order-btn" onclick="sendOrder()">Sifariş Ver</button>
+  </div>
+</aside>
+
+<!-- ====== HOME PAGE ====== -->
+<main id="page-home" class="page active">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <img src="images/logo.png" alt="Hi Coffee" class="hero-logo" />
+      <h1 class="hero-title">Hər yudumda bir salam!</h1>
+      <p class="hero-subtitle">Ən təzə qəhvə dənlərindən hazırlanan unikal içkilərimizi kəşf edin</p>
+      <button class="hero-btn" onclick="showPage('menu')">Menyuya Bax</button>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="section-tag">Haqqımızda</div>
+      <h2 class="section-title">Hi Coffee — Qəhvənin Yeni Dili</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Hi Coffee, qəhvəni sadəcə bir içki yox, bir təcrübə kimi sunan müasir bir kafe zənciridir. Hər fincan, ən yüksək keyfiyyətli qəhvə dənlərindən, həvəsli baristaların əlləri ilə hazırlanır.</p>
+          <p>Biz matcha, klassik qəhvə, imzalı içkilər və soyuq içkilər üzrə geniş menyu təklif edirik. Hər ziyarətdə sizi yeni bir dad, yeni bir hiss gözləyir.</p>
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-num">50+</span>
+              <span class="stat-label">Menyu maddəsi</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">1000+</span>
+              <span class="stat-label">Məmnun müştəri</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">5★</span>
+              <span class="stat-label">Ortalama reytinq</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="images/latte-tray.jpg" alt="Hi Coffee" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours Section -->
+  <section class="section hours-section" id="hours">
+    <div class="container">
+      <div class="section-tag">İş Saatları</div>
+      <h2 class="section-title">Bizi Ziyarət Edin</h2>
+      <div class="hours-grid">
+        <div class="hours-card">
+          <div class="hours-icon">☕</div>
+          <h3>Həftə içi</h3>
+          <p class="hours-time">08:00 — 22:00</p>
+          <p class="hours-days">Bazar ertəsi — Cümə</p>
+        </div>
+        <div class="hours-card hours-card-featured">
+          <div class="hours-icon">🌟</div>
+          <h3>Həftə sonu</h3>
+          <p class="hours-time">09:00 — 23:00</p>
+          <p class="hours-days">Şənbə — Bazar</p>
+        </div>
+        <div class="hours-card">
+          <div class="hours-icon">🎉</div>
+          <h3>Bayram günləri</h3>
+          <p class="hours-time">10:00 — 21:00</p>
+          <p class="hours-days">Rəsmi tətil günləri</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-tag">Əlaqə</div>
+      <h2 class="section-title">Bizimlə Əlaqə Saxlayın</h2>
+      <div class="contact-grid">
+        <a class="contact-card" href="https://wa.me/994559406018" target="_blank" rel="noopener">
+          <div class="contact-icon whatsapp-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-value">+994 55 940 60 18</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-card" href="https://www.instagram.com/sushioki.az/" target="_blank" rel="noopener">
+          <div class="contact-icon instagram-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">Instagram</span>
+            <span class="contact-value">@hicoffee</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-card" href="https://www.google.com/maps/place/Bak%C4%B1/@40.3947365,49.6898016,32622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x40307d6bd6211cf9:0x343f6b5e7ae56c6b!8m2!3d40.4092617!4d49.8670924!16zL20vMDFnZjU?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
+          <div class="contact-icon maps-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">Ünvan</span>
+            <span class="contact-value">Bakı, Azərbaycan</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-card" href="tel:+994559406018">
+          <div class="contact-icon phone-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">Telefon</span>
+            <span class="contact-value">+994 55 940 60 18</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ====== MENU PAGE ====== -->
+<main id="page-menu" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      Geri
+    </button>
+    <h1 class="page-title">Menyu</h1>
+    <div style="width:80px"></div>
+  </div>
+
+  <div class="menu-container">
+    <!-- Category Tabs -->
+    <div class="menu-tabs-wrapper">
+      <div class="menu-tabs" id="menuTabs">
+        <button class="menu-tab active" onclick="switchCategory('classic')">Klassik Qəhvə</button>
+        <button class="menu-tab" onclick="switchCategory('signature')">İmzalı Qəhvə</button>
+        <button class="menu-tab" onclick="switchCategory('iced')">Soyuq Qəhvə</button>
+        <button class="menu-tab" onclick="switchCategory('matcha')">Matcha</button>
+      </div>
+    </div>
+
+    <!-- Classic Coffee -->
+    <div class="menu-category active" id="cat-classic">
+      <div class="menu-grid">
+        <div class="menu-item" onclick="openProduct('espresso')">
+          <div class="menu-item-img">
+            <img src="images/menu-classic-coffee.jpg" alt="Espresso" loading="lazy" />
+            <div class="menu-item-overlay">
+              <span>Ətraflı</span>
+            </div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Espresso</h3>
+              <span class="menu-item-price">3 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('espresso','Espresso',3)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('americano')">
+          <div class="menu-item-img">
+            <img src="images/menu-classic-coffee.jpg" alt="Americano" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Americano</h3>
+              <span class="menu-item-price">4 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('americano','Americano',4)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('cappuccino')">
+          <div class="menu-item-img">
+            <img src="images/menu-classic-coffee.jpg" alt="Cappuccino" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Cappuccino</h3>
+              <span class="menu-item-price">5 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('cappuccino','Cappuccino',5)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('caffe-latte')">
+          <div class="menu-item-img">
+            <img src="images/menu-classic-coffee.jpg" alt="Caffe Latte" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Caffe Latte</h3>
+              <span class="menu-item-price">5 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('caffe-latte','Caffe Latte',5)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signature Coffee Bar -->
+    <div class="menu-category" id="cat-signature">
+      <div class="menu-grid">
+        <div class="menu-item" onclick="openProduct('raspberry-coconut')">
+          <div class="menu-item-img">
+            <img src="images/menu-signature-coffee.jpg" alt="Raspberry & Coconut Latte" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Raspberry & Coconut Latte</h3>
+              <span class="menu-item-price">7.5 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('raspberry-coconut','Raspberry & Coconut Latte',7.5)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('banana-caramel')">
+          <div class="menu-item-img">
+            <img src="images/menu-signature-coffee.jpg" alt="Banana & Salted Caramel Latte" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Banana & Salted Caramel Latte</h3>
+              <span class="menu-item-price">7.5 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('banana-caramel','Banana & Salted Caramel Latte',7.5)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('raf-classic')">
+          <div class="menu-item-img">
+            <img src="images/menu-signature-coffee.jpg" alt="Raf Classic" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Raf Classic</h3>
+              <span class="menu-item-price">7 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('raf-classic','Raf Classic',7)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('raf-macadamia')">
+          <div class="menu-item-img">
+            <img src="images/menu-signature-coffee.jpg" alt="Raf (Macadamia)" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Raf (Macadamia)</h3>
+              <span class="menu-item-price">7 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('raf-macadamia','Raf (Macadamia)',7)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Iced Coffee -->
+    <div class="menu-category" id="cat-iced">
+      <div class="menu-grid">
+        <div class="menu-item" onclick="openProduct('iced-americano')">
+          <div class="menu-item-img">
+            <img src="images/menu-iced-coffee.jpg" alt="Iced Americano" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Iced Americano</h3>
+              <span class="menu-item-price">6 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('iced-americano','Iced Americano',6)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('iced-latte')">
+          <div class="menu-item-img">
+            <img src="images/menu-iced-coffee.jpg" alt="Iced Latte" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Iced Latte</h3>
+              <span class="menu-item-price">7 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('iced-latte','Iced Latte',7)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('iced-raf')">
+          <div class="menu-item-img">
+            <img src="images/menu-iced-coffee.jpg" alt="Iced Raf" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Iced Raf</h3>
+              <span class="menu-item-price">7 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('iced-raf','Iced Raf',7)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('iced-mocha')">
+          <div class="menu-item-img">
+            <img src="images/menu-iced-coffee.jpg" alt="Iced Mocha" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Iced Mocha</h3>
+              <span class="menu-item-price">7 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('iced-mocha','Iced Mocha',7)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signature Matcha -->
+    <div class="menu-category" id="cat-matcha">
+      <div class="menu-grid">
+        <div class="menu-item" onclick="openProduct('matcha-latte')">
+          <div class="menu-item-img">
+            <img src="images/menu-signature-matcha.jpg" alt="Matcha Latte" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Matcha Latte</h3>
+              <span class="menu-item-price">7 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('matcha-latte','Matcha Latte',7)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('strawberry-matcha')">
+          <div class="menu-item-img">
+            <img src="images/menu-signature-matcha.jpg" alt="Strawberry Matcha Latte" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Strawberry Matcha Latte</h3>
+              <span class="menu-item-price">7 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('strawberry-matcha','Strawberry Matcha Latte',7)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('mango-matcha')">
+          <div class="menu-item-img">
+            <img src="images/menu-signature-matcha.jpg" alt="Mango Matcha Latte" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Mango Matcha Latte</h3>
+              <span class="menu-item-price">7 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('mango-matcha','Mango Matcha Latte',7)">+</button>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openProduct('matcha-affogato')">
+          <div class="menu-item-img">
+            <img src="images/pistachio-affogato.jpg" alt="Matcha Affogato" loading="lazy" />
+            <div class="menu-item-overlay"><span>Ətraflı</span></div>
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-info">
+              <h3>Matcha Affogato</h3>
+              <span class="menu-item-price">8 ₼</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart('matcha-affogato','Matcha Affogato',8)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ====== GALLERY PAGE ====== -->
+<main id="page-gallery" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      Geri
+    </button>
+    <h1 class="page-title">Qalerya</h1>
+    <div style="width:80px"></div>
+  </div>
+  <div class="gallery-container">
+    <div class="gallery-grid">
+      <div class="gallery-item gallery-item-large" onclick="openLightbox('images/pistachio-affogato.jpg','Pistachio Affogato')">
+        <img src="images/pistachio-affogato.jpg" alt="Pistachio Affogato" loading="lazy" />
+        <div class="gallery-caption">Pistachio Affogato</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/latte-tray.jpg','Hi Coffee Latte')">
+        <img src="images/latte-tray.jpg" alt="Hi Coffee Latte" loading="lazy" />
+        <div class="gallery-caption">Hi Coffee Latte</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/menu-signature-coffee.jpg','İmzalı Qəhvə')">
+        <img src="images/menu-signature-coffee.jpg" alt="İmzalı Qəhvə" loading="lazy" />
+        <div class="gallery-caption">İmzalı Qəhvə</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/menu-iced-coffee.jpg','Soyuq Qəhvə')">
+        <img src="images/menu-iced-coffee.jpg" alt="Soyuq Qəhvə" loading="lazy" />
+        <div class="gallery-caption">Soyuq Qəhvə</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/menu-classic-coffee.jpg','Klassik Qəhvə')">
+        <img src="images/menu-classic-coffee.jpg" alt="Klassik Qəhvə" loading="lazy" />
+        <div class="gallery-caption">Klassik Qəhvə</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/menu-signature-matcha.jpg','Matcha Koleksiyonu')">
+        <img src="images/menu-signature-matcha.jpg" alt="Matcha Koleksiyonu" loading="lazy" />
+        <div class="gallery-caption">Matcha Koleksiyonu</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ====== RESERVATION PAGE ====== -->
+<main id="page-reservation" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      Geri
+    </button>
+    <h1 class="page-title">Rezervasiya</h1>
+    <div style="width:80px"></div>
+  </div>
+  <div class="form-container">
+    <div class="form-card">
+      <div class="form-icon">📅</div>
+      <h2>Masa Rezervasiyası</h2>
+      <p>Aşağıdakı formu doldurun, rezervasiyanız WhatsApp üzərindən təsdiqlənəcək.</p>
+      <form id="reservationForm" onsubmit="submitReservation(event)">
+        <div class="form-group">
+          <label for="resName">Ad Soyad *</label>
+          <input type="text" id="resName" placeholder="Adınızı daxil edin" required />
+        </div>
+        <div class="form-group">
+          <label for="resPhone">Telefon Nömrəsi *</label>
+          <input type="tel" id="resPhone" placeholder="+994 XX XXX XX XX" required />
+        </div>
+        <div class="form-group">
+          <label for="resDate">Tarix *</label>
+          <input type="date" id="resDate" required />
+        </div>
+        <div class="form-group">
+          <label for="resTime">Saat *</label>
+          <input type="time" id="resTime" required />
+        </div>
+        <div class="form-group">
+          <label for="resGuests">Nəfər sayı *</label>
+          <select id="resGuests" required>
+            <option value="">Seçin</option>
+            <option value="1">1 nəfər</option>
+            <option value="2">2 nəfər</option>
+            <option value="3">3 nəfər</option>
+            <option value="4">4 nəfər</option>
+            <option value="5">5 nəfər</option>
+            <option value="6+">6+ nəfər</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="resNote">Qeyd (isteğe bağlı)</label>
+          <textarea id="resNote" rows="3" placeholder="Xüsusi istəkləriniz..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp ilə Göndər
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- ====== FAQ PAGE ====== -->
+<main id="page-faq" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      Geri
+    </button>
+    <h1 class="page-title">Tez-tez Verilən Suallar</h1>
+    <div style="width:80px"></div>
+  </div>
+  <div class="faq-container">
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Rezervasiya etmək məcburidir?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Xeyr, rezervasiya məcburi deyil. Lakin xüsusilə həftə sonu və bayram günlərində yer tapmaq üçün əvvəlcədən rezervasiya etməyi tövsiyə edirik.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Ödəniş üsulları hansılardır?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nağd, bank kartı (Visa, Mastercard) və ASAN Ödəniş ilə ödəniş edə bilərsiniz.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Wi-Fi mövcuddurmu?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Bəli, bütün müştərilərimiz üçün pulsuz yüksəksürətli Wi-Fi mövcuddur. Şifrəni kassirdan öyrənə bilərsiniz.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Veganlar üçün seçimlər varmı?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Bəli! Badam südü, yulaf südü və soya südü ilə içkilər hazırlamaq mümkündür. Barista ilə məsləhətləşin.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Qiymətlər niyə fərqlidir?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Qiymətlər içkinin növünə, istifadə olunan inqredientlərin keyfiyyətinə və hazırlanma üsuluna görə dəyişir.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Çıxarış sifariş vermək mümkündürmü?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Bəli, bütün içkilərimizi çıxarış üçün hazırlayırıq. WhatsApp üzərindən əvvəlcədən sifariş verə bilərsiniz.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Doğum günü üçün xüsusi tədbirlər keçirmək mümkündürmü?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Bəli, xüsusi tədbirlər üçün əvvəlcədən bizimlə WhatsApp üzərindən əlaqə saxlayın. Sizə uyğun bir paket hazırlayaq.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Ev heyvanları qəbul edilirmi?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Terrasa sahəmizdə ev heyvanlarınızla gəlməyiniz xoş qarşılanır. Daxili hissədə isə icazə verilmir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ====== VACANCIES PAGE ====== -->
+<main id="page-vacancies" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      Geri
+    </button>
+    <h1 class="page-title">Vakansiyalar</h1>
+    <div style="width:80px"></div>
+  </div>
+  <div class="vacancies-container">
+    <p class="vacancies-intro">Hi Coffee ailəsinə qoşulmaq istəyirsinizsə, aşağıdakı vakansiyalara baxın!</p>
+    <div class="vacancies-grid">
+      <div class="vacancy-card" onclick="openVacancy('barista')">
+        <div class="vacancy-icon">☕</div>
+        <div class="vacancy-body">
+          <h3>Barista</h3>
+          <p class="vacancy-type">Tam ştat • Bakı</p>
+          <p class="vacancy-desc">Keyfiyyətli qəhvə hazırlamaq, müştərilərlə ünsiyyət qurmaq və təmiz iş mühiti saxlamaq.</p>
+        </div>
+        <span class="vacancy-arrow">→</span>
+      </div>
+      <div class="vacancy-card" onclick="openVacancy('cashier')">
+        <div class="vacancy-icon">💳</div>
+        <div class="vacancy-body">
+          <h3>Kassir / Xidmət işçisi</h3>
+          <p class="vacancy-type">Tam ştat • Bakı</p>
+          <p class="vacancy-desc">Sifariş qəbulu, ödəniş işləmə, müştəri məmnuniyyətinin təmin edilməsi.</p>
+        </div>
+        <span class="vacancy-arrow">→</span>
+      </div>
+      <div class="vacancy-card" onclick="openVacancy('manager')">
+        <div class="vacancy-icon">📊</div>
+        <div class="vacancy-body">
+          <h3>Shift Manager</h3>
+          <p class="vacancy-type">Tam ştat • Bakı</p>
+          <p class="vacancy-desc">Kafe əməliyyatlarının idarə edilməsi, komanda rəhbərliyi və keyfiyyət nəzarəti.</p>
+        </div>
+        <span class="vacancy-arrow">→</span>
+      </div>
+      <div class="vacancy-card" onclick="openVacancy('cleaner')">
+        <div class="vacancy-icon">✨</div>
+        <div class="vacancy-body">
+          <h3>Təmizlik işçisi</h3>
+          <p class="vacancy-type">Yarım ştat • Bakı</p>
+          <p class="vacancy-desc">Kafenin təmiz və səliqəli saxlanması, sanitariya qaydalarına riayət edilməsi.</p>
+        </div>
+        <span class="vacancy-arrow">→</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ====== PRODUCT MODAL ====== -->
+<div class="modal-overlay" id="productModal" onclick="closeModal(event)">
+  <div class="modal-card" id="modalCard">
+    <button class="modal-close" onclick="closeProductModal()">✕</button>
+    <div class="modal-img">
+      <img id="modalImg" src="" alt="" />
+    </div>
+    <div class="modal-body">
+      <h2 id="modalName"></h2>
+      <p id="modalDesc"></p>
+      <div class="modal-footer">
+        <span class="modal-price" id="modalPrice"></span>
+        <button class="modal-add-btn" id="modalAddBtn" onclick="addFromModal()">Səbətə əlavə et</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== VACANCY MODAL ====== -->
+<div class="modal-overlay" id="vacancyModal" onclick="closeVacancyModalOverlay(event)">
+  <div class="modal-card vacancy-modal-card" id="vacancyModalCard">
+    <button class="modal-close" onclick="closeVacancyModal()">✕</button>
+    <div class="modal-body" style="padding-top:30px">
+      <div class="vacancy-modal-icon" id="vModalIcon"></div>
+      <h2 id="vModalTitle"></h2>
+      <p class="vacancy-type" id="vModalType"></p>
+      <div id="vModalDetails"></div>
+      <button class="submit-btn" id="vModalApply" onclick="applyVacancy()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp ilə Müraciət Et
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== LIGHTBOX ====== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="" />
+  <p id="lightboxCaption"></p>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
